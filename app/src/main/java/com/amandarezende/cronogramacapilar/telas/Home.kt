@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun MyScreen() {
+fun HomeScreen() {
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -49,5 +49,5 @@ fun MyScreen() {
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
-    MyScreen()
+    HomeScreen()
 }
