@@ -3,6 +3,8 @@ package com.amandarezende.cronogramacapilar
 import android.content.Context
 import androidx.room.Room
 import com.amandarezende.cronogramacapilar.data.CronoAppDatabase
+import com.amandarezende.cronogramacapilar.data.DataBaseDao
+import com.amandarezende.cronogramacapilar.data.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,26 +15,21 @@ import javax.inject.Singleton
 object CronoApplicationModule {
     @Module
     @InstallIn(SingletonComponent::class)
-    objeto AppModule {
+    object CronoModule {
         @Provides
         @Singleton
-        fun  provideAppDatabase ( @ApplicationContext appContext: Context) : CronoAppDatabase {
-            return Room.databaseBuilder(
-                appContext,
-                CronoAppDatabase:: class .java,
-                "room_database"
-            ).build()
+        fun cronoProvideAppDatabase(@ApplicationContext appContext: Context): CronoAppDatabase {
+            return Room
+                .databaseBuilder(appContext, CronoAppDatabase::class.java, "my-db")
+                .addMigrations(MIGRATION_1_2)
+                .allowMainThreadQueries()
+                .build()
         }
+
         @Provides
         @Singleton
-        fun  provideDao (appDatabase: CronoAppDatabase) : kao{
-            return appDatabase.taskDao()
-        }
-        @Provides
-        @Singleton
-        fun  provideTaskRepository (taskDao: TaskDao ) : TaskRepository {
-            return TaskRepository(taskDao)
+        fun CronoProvideDao(appDatabase: CronoAppDatabase): DataBaseDao {
+            return appDatabase.cronoDao()
         }
     }
-
 }

@@ -1,35 +1,29 @@
 package com.amandarezende.cronogramacapilar.data
 
-import android.content.Context
 import androidx.room.AutoMigration
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     version = 2,
     entities = [Ativos::class, Cabelo::class, Cronograma::class, Etapa::class, Notificacao::class, Perfil::class, Produto::class],
-    autoMigrations = [AutoMigration (from = 1, to = 2)],
-    exportSchema = true
+    exportSchema = true,
 )
 abstract class CronoAppDatabase : RoomDatabase() {
-    abstract fun userDao(): DataBaseDao
+    abstract fun cronoDao(): DataBaseDao
+}
 
-    companion object {
-        @Volatile
-        private var INSTANCE: CronoAppDatabase? = null
-
-        fun getDatabase(context: Context): CronoAppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    CronoAppDatabase::class.java,
-                    "app_database"
-                ).build()
-
-                INSTANCE = instance
-                instance
-            }
-        }
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("INSERT INTO Ativos (id, nome, recomendacao) VALUES(1, 'Glicerina', ''Hidratação)")
+//        db.execSQL( "" )
+//        db.execSQL( "" )
+//        db.execSQL( "" )
+//        db.execSQL( "" )
+//        db.execSQL( "" )
+//        db.execSQL( "" )
+//        db.execSQL( "" )
     }
 }

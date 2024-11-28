@@ -49,6 +49,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    sourceSets {
+        getByName("debug").assets.srcDirs(files("$projectDir/schemas"))
+    }
 }
 
 dependencies {
@@ -84,6 +87,7 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
