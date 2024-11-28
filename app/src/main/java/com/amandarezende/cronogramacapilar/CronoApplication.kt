@@ -5,7 +5,9 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.amandarezende.cronogramacapilar.data.AppDataBase
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class CronoApplication : Application() {
     companion object {
         var database: AppDataBase? = null
