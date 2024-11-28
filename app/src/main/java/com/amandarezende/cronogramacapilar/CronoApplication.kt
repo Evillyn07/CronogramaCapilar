@@ -4,20 +4,20 @@ import android.app.Application
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.amandarezende.cronogramacapilar.data.AppDataBase
+import com.amandarezende.cronogramacapilar.data.CronoAppDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class CronoApplication : Application() {
     companion object {
-        var database: AppDataBase? = null
+        var database: CronoAppDatabase? = null
     }
 
     override fun onCreate() {
         super.onCreate()
         database =
             Room
-                .databaseBuilder(this, AppDataBase::class.java, "my-db")
+                .databaseBuilder(this, CronoAppDatabase::class.java, "my-db")
                 .addMigrations(MIGRATION_1_2)
                 .allowMainThreadQueries()
                 .build()

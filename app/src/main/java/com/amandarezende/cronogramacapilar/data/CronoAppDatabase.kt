@@ -12,18 +12,18 @@ import androidx.room.RoomDatabase
     autoMigrations = [AutoMigration (from = 1, to = 2)],
     exportSchema = true
 )
-abstract class AppDatabase : RoomDatabase() {
+abstract class CronoAppDatabase : RoomDatabase() {
     abstract fun userDao(): DataBaseDao
 
     companion object {
         @Volatile
-        private var INSTANCE: AppDatabase? = null
+        private var INSTANCE: CronoAppDatabase? = null
 
-        fun getDatabase(context: Context): AppDatabase {
+        fun getDatabase(context: Context): CronoAppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    AppDatabase::class.java,
+                    CronoAppDatabase::class.java,
                     "app_database"
                 ).build()
 
