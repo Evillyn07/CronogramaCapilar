@@ -1,4 +1,4 @@
-package com.amandarezende.cronogramacapilar.telas
+package com.amandarezende.cronogramacapilar.presentation.telas
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -12,6 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.NotificacaoViewModel
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.PerfilViewModel
 import java.util.Calendar
 
 
@@ -19,6 +21,7 @@ import java.util.Calendar
 @Composable
 fun NotificacaoScreen(
     navController: NavController,
+    viewModel: NotificacaoViewModel
 ) {
     val currentTime = Calendar.getInstance()
 
@@ -41,5 +44,7 @@ fun NotificacaoScreen(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    NotificacaoScreen(NavController(LocalContext.current))
+    NotificacaoScreen(NavController(LocalContext.current),
+        NotificacaoViewModel()
+    )
 }

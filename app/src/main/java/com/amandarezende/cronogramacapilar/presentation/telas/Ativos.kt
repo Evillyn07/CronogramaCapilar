@@ -1,4 +1,4 @@
-package com.amandarezende.cronogramacapilar.telas
+package com.amandarezende.cronogramacapilar.presentation.telas
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Column
@@ -26,11 +26,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.AtivosViewModel
 
 @Composable
 fun AtivosScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: AtivosViewModel
 )
 {
     val ativos = listOf("Hidratação", "Nutrição", "Reconstrução")
@@ -105,5 +106,8 @@ fun Descricao(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun AtivosPreview() {
-    AtivosScreen(NavController(LocalContext.current))
+    AtivosScreen(
+        NavController(LocalContext.current),
+        AtivosViewModel()
+    )
 }

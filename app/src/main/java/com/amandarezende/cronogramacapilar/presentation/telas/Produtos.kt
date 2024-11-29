@@ -1,4 +1,4 @@
-package com.amandarezende.cronogramacapilar.telas
+package com.amandarezende.cronogramacapilar.presentation.telas
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Column
@@ -27,10 +27,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.AtivosViewModel
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.ProdutoViewModel
 
 @Composable
 fun ProdutosScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: ProdutoViewModel
 ) {
     val produtos = listOf("Hidratação", "Nutrição", "Reconstrução")
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -104,5 +107,8 @@ fun DescricaoProdutos(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun ProdutosPreview() {
-    ProdutosScreen(NavController(LocalContext.current))
+    ProdutosScreen(
+        NavController(LocalContext.current),
+        ProdutoViewModel()
+    )
 }

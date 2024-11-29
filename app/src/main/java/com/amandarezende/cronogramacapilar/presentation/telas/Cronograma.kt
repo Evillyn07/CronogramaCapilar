@@ -1,4 +1,4 @@
-package com.amandarezende.cronogramacapilar.telas
+package com.amandarezende.cronogramacapilar.presentation.telas
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,9 +22,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.EtapaViewModel
 
 @Composable
-fun CronogramaScreen(navController: NavHostController) {
+fun CronogramaScreen(navController: NavHostController,
+                     viewModel: CronogramaViewModel
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -97,7 +101,9 @@ fun SelecionarObjetivos() {
 @Preview(showBackground = true)
 @Composable
 fun CronogramaPreview() {
-    CronogramaScreen(NavHostController(LocalContext.current))
+    CronogramaScreen(NavHostController(LocalContext.current),
+        CronogramaViewModel()
+    )
 }
 
 @Preview(showBackground = true)

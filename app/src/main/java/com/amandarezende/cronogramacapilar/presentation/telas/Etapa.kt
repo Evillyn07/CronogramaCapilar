@@ -1,4 +1,4 @@
-package com.amandarezende.cronogramacapilar.telas
+package com.amandarezende.cronogramacapilar.presentation.telas
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -13,9 +13,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.EtapaViewModel
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.HomeViewModel
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.NotificacaoViewModel
 
 @Composable
-fun EtapaScreen(navController: NavController) {
+fun EtapaScreen(navController: NavController,
+                viewModel: EtapaViewModel
+
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
@@ -40,5 +46,7 @@ fun EtapaScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun EtapaPreview() {
-    EtapaScreen(NavController(LocalContext.current))
+    EtapaScreen(NavController(LocalContext.current),
+        EtapaViewModel()
+    )
 }

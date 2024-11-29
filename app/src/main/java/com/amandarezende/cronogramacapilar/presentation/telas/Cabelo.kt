@@ -1,4 +1,4 @@
-package com.amandarezende.cronogramacapilar.telas
+package com.amandarezende.cronogramacapilar.presentation.telas
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,10 +17,12 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel
 
 
 @Composable
-fun CabeloScreen(navController: NavController) {
+fun CabeloScreen(navController: NavController,
+                 viewModel: CronogramaViewModel) {
     val childCheckedStates = remember { mutableStateListOf(false, false, false) }
     val parentState = when {
         childCheckedStates.all { it } -> ToggleableState.On
@@ -166,5 +168,7 @@ fun CabeloScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun CabeloPreview() {
-    CabeloScreen(NavController(LocalContext.current))
+    CabeloScreen(NavController(LocalContext.current),
+        CronogramaViewModel()
+    )
 }

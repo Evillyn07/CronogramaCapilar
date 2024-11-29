@@ -2,6 +2,7 @@
 activityCompose = "1.9.3"
 agp = "8.5.2"
 hiltAndroid = "2.51.1"
+hiltNavigationCompose = "1.2.0"
 kotlin = "1.9.25"
 
 coreKtx = "1.15.0"
@@ -33,6 +34,7 @@ navigationCompose = "2.8.4"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose"}
 androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", name = "material3-adaptative", version.ref = "m3AdaptativeVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", name = "material-icons-core", version.ref = "mIconsCoreVersion" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", name = "material-icons-extended", version.ref = "mIconsExtendedVersion"}

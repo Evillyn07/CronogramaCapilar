@@ -1,4 +1,4 @@
-package com.amandarezende.cronogramacapilar.telas
+package com.amandarezende.cronogramacapilar.presentation.telas
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,10 +16,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.HomeViewModel
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.NotificacaoViewModel
 
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController,
+               viewModel: HomeViewModel
+) {
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -51,5 +55,7 @@ fun HomeScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
-    HomeScreen(NavController(LocalContext.current))
+    HomeScreen(NavController(LocalContext.current),
+        HomeViewModel()
+    )
 }
