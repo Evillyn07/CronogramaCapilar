@@ -16,13 +16,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @Composable
-fun Cronograma() {
+fun CronogramaScreen(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -95,7 +97,7 @@ fun SelecionarObjetivos() {
 @Preview(showBackground = true)
 @Composable
 fun CronogramaPreview() {
-    Cronograma()
+    CronogramaScreen(NavHostController(LocalContext.current))
 }
 
 @Preview(showBackground = true)

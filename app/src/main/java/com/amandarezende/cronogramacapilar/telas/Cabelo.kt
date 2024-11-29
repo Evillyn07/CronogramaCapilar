@@ -12,13 +12,15 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 
 @Composable
-fun Cabelo() {
+fun CabeloScreen(navController: NavController) {
     val childCheckedStates = remember { mutableStateListOf(false, false, false) }
     val parentState = when {
         childCheckedStates.all { it } -> ToggleableState.On
@@ -164,5 +166,5 @@ fun Cabelo() {
 @Preview(showBackground = true)
 @Composable
 fun CabeloPreview() {
-    Cabelo()
+    CabeloScreen(NavController(LocalContext.current))
 }

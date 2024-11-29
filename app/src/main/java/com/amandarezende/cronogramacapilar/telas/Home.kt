@@ -10,14 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -49,5 +51,5 @@ fun HomeScreen() {
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
-    HomeScreen()
+    HomeScreen(NavController(LocalContext.current))
 }

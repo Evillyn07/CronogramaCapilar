@@ -21,17 +21,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 
 @Composable
-private fun Greeting(
-    modifier: Modifier = Modifier,
-    names: List<String> = listOf("Hidratação", "Nutrição", "Reconstrução", "Umectação")
-)
-{
-    LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
+fun ProdutosScreen(
+    navController: NavController
+) {
+    val produtos = listOf("Hidratação", "Nutrição", "Reconstrução")
+    LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
         item {
             Text(
                 text = "Dicas de Produtos",
@@ -40,26 +42,26 @@ private fun Greeting(
                     .padding(vertical = 16.dp, horizontal = 8.dp)
             )
         }
-        items(names) { name ->
-            Greeting(name = name)
+        items(produtos) { name ->
+            OpcoesProdutos(name = name)
         }
     }
 
 }
 
 @Composable
-private fun Greeting(name: String) {
+fun OpcoesProdutos(name: String) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
         ), modifier = Modifier.padding(vertical = 2.dp, horizontal = 2.dp)
     ) {
-        CardContent(name = name)
+        DescricaoProdutos(name = name)
     }
 }
 
 @Composable
-private fun CardContent(name: String) {
+fun DescricaoProdutos(name: String) {
     var expanded by remember {
         mutableStateOf(false)
     }
@@ -102,5 +104,5 @@ private fun CardContent(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun ProdutosPreview() {
-    Greeting()
+    ProdutosScreen(NavController(LocalContext.current))
 }

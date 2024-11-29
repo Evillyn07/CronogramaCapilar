@@ -18,11 +18,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
-fun MyFormScreen() {
+fun PerfilScreen(navController: NavController) {
     var nome by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var cabelo by remember { mutableStateOf("") }
@@ -71,5 +73,5 @@ fun MyFormScreen() {
 @Preview(showBackground = true)
 @Composable
 fun PerfilPreview() {
-    MyFormScreen()
+    PerfilScreen(NavController(LocalContext.current))
 }

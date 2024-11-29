@@ -8,16 +8,17 @@ import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import java.util.Calendar
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Notificacao(
-    modifier: Modifier = Modifier,
-    onConfirm: () -> Unit = {},
-    onDismiss: () -> Unit = {},
+fun NotificacaoScreen(
+    navController: NavController,
 ) {
     val currentTime = Calendar.getInstance()
 
@@ -27,11 +28,11 @@ fun Notificacao(
         is24Hour = true,
     )
 
-    Column(modifier = modifier) {
+    Column {
         TimePicker(
             state = timePickerState,
         )
-        Button(onClick = onConfirm) {
+        Button(onClick = {}) {
             Text("Confirmar Horário")
         }
     }
@@ -40,5 +41,5 @@ fun Notificacao(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    Notificacao()
+    NotificacaoScreen(NavController(LocalContext.current))
 }
