@@ -1,5 +1,6 @@
 package com.amandarezende.cronogramacapilar.presentation.telas
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,13 +23,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.amandarezende.cronogramacapilar.presentation.MainActivity
 import com.amandarezende.cronogramacapilar.presentation.viewmodel.PerfilViewModel
-import com.amandarezende.cronogramacapilar.presentation.viewmodel.ProdutoViewModel
 
 @Composable
 fun PerfilScreen(navController: NavController,
                  viewModel: PerfilViewModel
 ) {
+//    val activity = LocalContext.current as Activity
     var nome by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var cabelo by remember { mutableStateOf("") }
@@ -64,7 +66,9 @@ fun PerfilScreen(navController: NavController,
         }
 
         Button(
-            onClick = {},
+            onClick = {
+//                activity.onBackPressed()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)
@@ -77,7 +81,8 @@ fun PerfilScreen(navController: NavController,
 @Preview(showBackground = true)
 @Composable
 fun PerfilPreview() {
-    PerfilScreen(NavController(LocalContext.current),
+    PerfilScreen(
+        NavController(MainActivity()),
         PerfilViewModel()
     )
 }

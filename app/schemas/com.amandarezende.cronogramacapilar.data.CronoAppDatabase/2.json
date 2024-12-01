@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "bdf6a9854567f14c145f94c1c242c667",
+    "identityHash": "4a64dd2598ef06e33c7d28aecd873580",
     "entities": [
       {
         "tableName": "Ativos",
@@ -76,11 +76,17 @@
       },
       {
         "tableName": "Cronograma",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `dias` TEXT NOT NULL, `objetivos` TEXT NOT NULL, `segunda` INTEGER NOT NULL, `terca` INTEGER NOT NULL, `quarta` INTEGER NOT NULL, `quinta` INTEGER NOT NULL, `sexta` INTEGER NOT NULL, `sabado` INTEGER NOT NULL, `domingo` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `idPerfil` INTEGER NOT NULL, `dias` TEXT NOT NULL, `objetivos` TEXT NOT NULL, `segunda` INTEGER NOT NULL, `terca` INTEGER NOT NULL, `quarta` INTEGER NOT NULL, `quinta` INTEGER NOT NULL, `sexta` INTEGER NOT NULL, `sabado` INTEGER NOT NULL, `domingo` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`idPerfil`) REFERENCES `Perfil`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idPerfil",
+            "columnName": "idPerfil",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -146,11 +152,23 @@
           ]
         },
         "indices": [],
-        "foreignKeys": []
+        "foreignKeys": [
+          {
+            "table": "Perfil",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idPerfil"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       },
       {
         "tableName": "Etapa",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `nome` TEXT NOT NULL, `diaMes` TEXT NOT NULL, `idCronograma` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`idCronograma`) REFERENCES `Cronograma`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `nome` TEXT NOT NULL, `diaMes` INTEGER NOT NULL, `idCronograma` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`idCronograma`) REFERENCES `Cronograma`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -167,7 +185,7 @@
           {
             "fieldPath": "diaMes",
             "columnName": "diaMes",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -273,7 +291,7 @@
       },
       {
         "tableName": "Perfil",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `nome` TEXT NOT NULL, `email` TEXT NOT NULL, `senha` TEXT NOT NULL, `peso` TEXT NOT NULL, `idCabelo` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`idCabelo`) REFERENCES `Cabelo`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `nome` TEXT NOT NULL, `email` TEXT NOT NULL, `senha` TEXT NOT NULL, `peso` TEXT NOT NULL, `idCabelo` INTEGER, PRIMARY KEY(`id`), FOREIGN KEY(`idCabelo`) REFERENCES `Cabelo`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -309,7 +327,7 @@
             "fieldPath": "idCabelo",
             "columnName": "idCabelo",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -375,7 +393,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bdf6a9854567f14c145f94c1c242c667')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4a64dd2598ef06e33c7d28aecd873580')"
     ]
   }
 }

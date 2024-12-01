@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
 data class Etapa(
     @PrimaryKey val id: Int,
     var nome: String,
-    var diaMes: String,
+    var diaMes: Int,
     val idCronograma: Int
 
 )

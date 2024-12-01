@@ -20,5 +20,5 @@ data class Perfil(
     var email: String,
     var senha: String,
     var peso: String,
-    var idCabelo: Int
+    var idCabelo: Int?
 )

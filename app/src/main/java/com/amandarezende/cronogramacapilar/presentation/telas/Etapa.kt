@@ -28,16 +28,20 @@ fun EtapaScreen(navController: NavController,
         modifier = Modifier.padding(16.dp)
     ) {
         Text(
-            text = "ETAPA ATUAL",
+            text = "Etapa Atual",
             style = TextStyle(fontSize = 36.sp),
             modifier = Modifier.padding(bottom = 20.dp)
         )
 
-        Button(onClick = {}) {
+        Button(onClick = {
+            navController.navigate("cronocapilar/ativos")
+        }) {
             Text(text = "Ativos")
         }
 
-        Button(onClick = {}) {
+        Button(onClick = {
+            navController.navigate("cronocapilar/produtos")
+        }) {
             Text(text = "Produtos")
         }
     }
