@@ -87,7 +87,7 @@ interface DataBaseDao {
     @Query("SELECT * FROM Cabelo")
     fun loadCabelo(): List<Cabelo>
     @Query("SELECT * FROM Cabelo WHERE id = :id")
-    fun loadCabeloById(id: Int): Cabelo
+    fun loadCabeloById(id: Int): Cabelo?
 
 
     /***

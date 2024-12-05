@@ -24,6 +24,7 @@ class HomeViewModel @Inject constructor(
         usuario?.let {
             val cabelo = dao.loadCabeloById(it.idCabelo ?: 1)
             val tipoCronograma = when {
+                cabelo == null -> INDEFINIDO
                 cabelo.tipoCabelo == "Secos"
                         && cabelo.tipoFio == "Frágeis"
                         && cabelo.quimica == "SIM" -> MUITO_DANIFICADO

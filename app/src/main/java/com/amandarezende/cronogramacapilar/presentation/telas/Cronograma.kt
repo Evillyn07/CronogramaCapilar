@@ -3,8 +3,10 @@ package com.amandarezende.cronogramacapilar.presentation.telas
 import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -42,6 +44,7 @@ fun CronogramaScreen(
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
+        item { Spacer(modifier = Modifier.height(16.dp)) }
         item { SelecionarDias(viewModel) }
         item { SelecionarObjetivos(viewModel) }
         item {

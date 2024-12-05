@@ -37,10 +37,13 @@ fun CabeloScreen(
     val quimica by viewModel.quimica.collectAsState()
 
     Column(
+
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(32.dp)
+
     ) {
+
         Text(text = "Tipo de Cabelo")
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text("Normal")
