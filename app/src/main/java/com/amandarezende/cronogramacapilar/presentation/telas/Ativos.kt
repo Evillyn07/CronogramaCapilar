@@ -3,9 +3,9 @@ package com.amandarezende.cronogramacapilar.presentation.telas
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
@@ -16,6 +16,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,16 +27,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.lazy.items
 import androidx.navigation.NavController
+import com.amandarezende.cronogramacapilar.data.Ativos
+import com.amandarezende.cronogramacapilar.data.DataBaseDao.Companion.DAOTESTE
 import com.amandarezende.cronogramacapilar.presentation.viewmodel.AtivosViewModel
 
 @Composable
 fun AtivosScreen(
     navController: NavController,
     viewModel: AtivosViewModel
-)
-{
-    val ativos = listOf("Hidratação", "Nutrição", "Reconstrução")
+) {
+    val recomendacaoAtivos = viewModel.recomendacaoAtivos.collectAsState()
+    LaunchedEffect(key1 = Unit) {
+        viewModel.setup()
+    }
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
         item {
             Text(
@@ -44,61 +51,53 @@ fun AtivosScreen(
                     .padding(vertical = 16.dp, horizontal = 8.dp)
             )
         }
-        items(ativos) { name ->
-            NomeAtivo(name = name)
+
+        items(recomendacaoAtivos.value.keys.toTypedArray()) { recomendacao ->
+            Ativo(recomendacao, recomendacaoAtivos.value.getValue(recomendacao))
         }
     }
-
 }
 
 @Composable
-fun NomeAtivo(name: String) {
+fun Ativo(recomendacao: String, ativos: List<Ativos?>?) {
+    var expanded by remember { mutableStateOf(false) }
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
-        ), modifier = Modifier.padding(vertical = 2.dp, horizontal = 2.dp)
+        ), modifier = Modifier
+            .padding(vertical = 2.dp, horizontal = 2.dp)
+            .fillMaxWidth()
     ) {
-        Descricao(name = name)
-    }
-}
-
-@Composable
-fun Descricao(name: String) {
-    var expanded by remember {
-        mutableStateOf(false)
-    }
-    Row(
-        modifier = Modifier
-            .padding(12.dp)
-            .animateContentSize()
-    )
-    {
-        Column(
+        Row(
             modifier = Modifier
-                .weight(1f)
                 .padding(12.dp)
+                .animateContentSize()
         )
         {
-            Text(text = "")
-            Text(
-                text = name,
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(12.dp)
             )
-
-            if (expanded) {
-                Text(text = ("").repeat(4))
-            }
-        }
-        IconButton(onClick = { expanded = !expanded }) {
-            Icon(
-                imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                contentDescription =
+            {
+                Text(
+                    text = recomendacao,
+                    style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
+                )
                 if (expanded) {
-                    "show less"
-                } else {
-                    "show more"
+                    ativos?.forEach {
+                        Text(text = (it?.nome.orEmpty()))
+                    }
                 }
-            )
+            }
+
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(
+                    imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                    contentDescription =
+                    if (expanded) "show less" else "show more"
+                )
+            }
         }
     }
 }
@@ -108,6 +107,6 @@ fun Descricao(name: String) {
 fun AtivosPreview() {
     AtivosScreen(
         NavController(LocalContext.current),
-        AtivosViewModel()
+        AtivosViewModel(DAOTESTE)
     )
 }

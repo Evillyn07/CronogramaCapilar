@@ -5,8 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Cabelo")
 data class Cabelo(
-    @PrimaryKey val id: Int,
-    var tipoCabelo: String,
-    var tipoFio: String,
-    var quimica: Boolean
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
+    var tipoCabelo: String = "",
+    var tipoFio: String = "",
+    var quimica: String = ""
 )
+

@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.amandarezende.cronogramacapilar.data.DataBaseDao
 import com.amandarezende.cronogramacapilar.presentation.viewmodel.NotificacaoViewModel
 import com.amandarezende.cronogramacapilar.presentation.viewmodel.PerfilViewModel
 import java.util.Calendar
@@ -45,6 +46,6 @@ fun NotificacaoScreen(
 @Composable
 fun DefaultPreview() {
     NotificacaoScreen(NavController(LocalContext.current),
-        NotificacaoViewModel()
+        NotificacaoViewModel(DataBaseDao.DAOTESTE)
     )
 }

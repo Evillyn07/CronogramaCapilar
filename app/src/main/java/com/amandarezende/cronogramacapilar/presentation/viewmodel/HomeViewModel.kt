@@ -19,7 +19,10 @@ class HomeViewModel @Inject constructor(
     val etapaAtual = MutableStateFlow<Etapa?>(null)
 
     fun setup() = viewModelScope.launch {
-        val etapa = dao.loadEtapaAtual(1, 29)
-        etapaAtual.value = etapa
+        val usuario = dao.loadPerfil().firstOrNull()
+        usuario?.let {
+            val etapa = dao.loadEtapaAtual(it.id, 29)
+            etapaAtual.value = etapa
+        }
     }
 }

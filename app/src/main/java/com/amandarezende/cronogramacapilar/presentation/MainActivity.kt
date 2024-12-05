@@ -16,7 +16,7 @@ import com.amandarezende.cronogramacapilar.presentation.telas.EtapaScreen
 import com.amandarezende.cronogramacapilar.presentation.telas.HomeScreen
 import com.amandarezende.cronogramacapilar.presentation.telas.NotificacaoScreen
 import com.amandarezende.cronogramacapilar.presentation.telas.PerfilScreen
-import com.amandarezende.cronogramacapilar.presentation.telas.ProdutosScreen
+import com.amandarezende.cronogramacapilar.presentation.telas.ProdutoScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
                 composable("cronocapilar/produtos") {
-                    ProdutosScreen(
+                    ProdutoScreen(
                         navController = navController,
                         viewModel = hiltViewModel()
                     )
