@@ -11,10 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel.TipoCabelo.INDEFINIDO
-import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel.TipoCabelo.SAUDAVEL
-import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel.TipoCabelo.MUITO_DANIFICADO
-import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel.TipoCabelo.POUCO_DANIFICADO
 import javax.inject.Inject
 
 
@@ -25,7 +21,6 @@ class CronogramaViewModel @Inject constructor(
 ) : AndroidViewModel(context as Application) {
 
     private lateinit var cronograma: Cronograma
-    val tipoCabelo = MutableStateFlow(INDEFINIDO)
 
     val objetivos = MutableStateFlow("")
     var domingo = MutableStateFlow(false)
@@ -46,12 +41,6 @@ class CronogramaViewModel @Inject constructor(
 
 
     fun setup() = viewModelScope.launch {
-        setupCronograma()
-        setupCabelo()
-
-    }
-
-    private fun setupCronograma() {
         cronograma = dao.loadCronograma().firstOrNull() ?: Cronograma(
             idPerfil = 1,
             objetivos = ""
@@ -72,24 +61,6 @@ class CronogramaViewModel @Inject constructor(
         crescimento.value = cronograma.crescimento
         reduzirOleosidade.value = cronograma.reduzirOleosidade
         manterHidratacao.value = cronograma.manterHidratacao
-    }
-
-    private fun setupCabelo() {
-        val usuario = dao.loadPerfil().firstOrNull()
-        usuario?.let {
-            val cabelo = dao.loadCabeloById(it.idCabelo ?: 1)
-            val tipoCronograma = when {
-                cabelo.tipoCabelo == "Secos"
-                        && cabelo.tipoFio == "Frágeis"
-                        && cabelo.quimica == "SIM" -> MUITO_DANIFICADO
-
-                cabelo.tipoFio == "Porosos" || cabelo.tipoFio == "Frágeis"-> POUCO_DANIFICADO
-
-
-                else -> SAUDAVEL
-            }
-            tipoCabelo.value = tipoCronograma
-        }
     }
 
     fun inserirCronograma() {
@@ -135,10 +106,5 @@ class CronogramaViewModel @Inject constructor(
         manterHidratacao.value = false
 
         inserirCronograma()
-    }
-
-
-    enum class TipoCabelo {
-        MUITO_DANIFICADO, POUCO_DANIFICADO, SAUDAVEL, INDEFINIDO
     }
 }

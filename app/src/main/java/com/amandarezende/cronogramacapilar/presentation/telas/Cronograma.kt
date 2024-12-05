@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,10 +28,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.amandarezende.cronogramacapilar.CronoApplication
 import com.amandarezende.cronogramacapilar.data.DataBaseDao
 import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel
-import com.amandarezende.cronogramacapilar.presentation.viewmodel.CronogramaViewModel.TipoCabelo
 
 
 @Composable
@@ -42,48 +39,9 @@ fun CronogramaScreen(
 ) {
     LaunchedEffect(key1 = Unit) { viewModel.setup() }
 
-    val tipoCabelo = viewModel.tipoCabelo.collectAsState()
-
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
-
-        if (tipoCabelo.value == TipoCabelo.MUITO_DANIFICADO) {
-            item {
-                Text(
-                    text = "Cabelo Muito Danificado",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-                CardMuitoDanificado(viewModel)
-            }
-        }
-
-        if (tipoCabelo.value == TipoCabelo.POUCO_DANIFICADO) {
-            item {
-                Text(
-                    text = "Cabelo Pouco Danificado",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-                CardPoucoDanificado(viewModel)
-            }
-        }
-
-        if (tipoCabelo.value == TipoCabelo.SAUDAVEL) {
-            item {
-                Text(
-                    text = "Cabelo Saudável",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-                CardCabeloSaudavel(viewModel)
-            }
-        }
-
         item { SelecionarDias(viewModel) }
         item { SelecionarObjetivos(viewModel) }
         item {
@@ -209,7 +167,7 @@ fun SelecionarObjetivos(viewModel: CronogramaViewModel) {
 }
 
 @Composable
-fun CardMuitoDanificado(viewModel: CronogramaViewModel) {
+fun CardMuitoDanificado() {
     val esconderCard1 = remember {
         mutableStateOf(true)
     }
@@ -392,7 +350,7 @@ fun CardMuitoDanificado(viewModel: CronogramaViewModel) {
 }
 
 @Composable
-fun CardPoucoDanificado(viewModel: CronogramaViewModel) {
+fun CardPoucoDanificado() {
     val esconderCard2 = remember {
         mutableStateOf(true)
     }
@@ -575,7 +533,7 @@ fun CardPoucoDanificado(viewModel: CronogramaViewModel) {
 }
 
 @Composable
-fun CardCabeloSaudavel(viewModel: CronogramaViewModel) {
+fun CardCabeloSaudavel() {
     val esconderCard3 = remember {
         mutableStateOf(true)
     }
@@ -776,39 +734,6 @@ fun SelecionarDiasPreview() {
 @Composable
 fun SelecionarObjetivosPreview() {
     SelecionarObjetivos(
-        CronogramaViewModel(
-            Application(),
-            DataBaseDao.DAOTESTE
-        )
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CardCabeloMuitoDanificadoPreview() {
-    CardMuitoDanificado(
-        CronogramaViewModel(
-            Application(),
-            DataBaseDao.DAOTESTE
-        )
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CardCabeloPoucoDanificadoPreview() {
-    CardPoucoDanificado(
-        CronogramaViewModel(
-            Application(),
-            DataBaseDao.DAOTESTE
-        )
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CardCabeloSaudavelPreview() {
-    CardPoucoDanificado(
         CronogramaViewModel(
             Application(),
             DataBaseDao.DAOTESTE

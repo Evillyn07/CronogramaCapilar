@@ -1,13 +1,14 @@
 package com.amandarezende.cronogramacapilar.presentation.viewmodel
 
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amandarezende.cronogramacapilar.data.DataBaseDao
-import com.amandarezende.cronogramacapilar.data.Etapa
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.HomeViewModel.TipoCabelo.INDEFINIDO
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.HomeViewModel.TipoCabelo.MUITO_DANIFICADO
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.HomeViewModel.TipoCabelo.POUCO_DANIFICADO
+import com.amandarezende.cronogramacapilar.presentation.viewmodel.HomeViewModel.TipoCabelo.SAUDAVEL
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,13 +17,27 @@ class HomeViewModel @Inject constructor(
     private val dao: DataBaseDao
 ) : ViewModel() {
 
-    val etapaAtual = MutableStateFlow<Etapa?>(null)
+    val tipoCabelo = MutableStateFlow(INDEFINIDO)
 
     fun setup() = viewModelScope.launch {
         val usuario = dao.loadPerfil().firstOrNull()
         usuario?.let {
-            val etapa = dao.loadEtapaAtual(it.id, 29)
-            etapaAtual.value = etapa
+            val cabelo = dao.loadCabeloById(it.idCabelo ?: 1)
+            val tipoCronograma = when {
+                cabelo.tipoCabelo == "Secos"
+                        && cabelo.tipoFio == "Frágeis"
+                        && cabelo.quimica == "SIM" -> MUITO_DANIFICADO
+
+                cabelo.tipoFio == "Porosos" || cabelo.tipoFio == "Frágeis" -> POUCO_DANIFICADO
+
+
+                else -> SAUDAVEL
+            }
+            tipoCabelo.value = tipoCronograma
         }
+    }
+
+    enum class TipoCabelo {
+        MUITO_DANIFICADO, POUCO_DANIFICADO, SAUDAVEL, INDEFINIDO
     }
 }

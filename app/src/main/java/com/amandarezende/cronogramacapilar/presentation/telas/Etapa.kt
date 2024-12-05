@@ -29,7 +29,7 @@ fun EtapaScreen(navController: NavController,
         modifier = Modifier.padding(16.dp)
     ) {
         Text(
-            text = "Etapa Atual",
+            text = "Sugestões",
             style = TextStyle(fontSize = 36.sp),
             modifier = Modifier.padding(bottom = 20.dp)
         )
