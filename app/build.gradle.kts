@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.navigation.compose)
+    testImplementation(libs.junit.jupiter)
     debugImplementation(libs.androidx.ui.tooling)
     // Optional - Included automatically by material, only add when you need
     // the icons but not the material library (e.g. when using Material3 or a
@@ -111,8 +112,8 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation (libs.androidx.work.runtime.ktx)
     implementation (libs.androidx.work.runtime.ktx)
-
-
+    testImplementation (libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
 
 kapt {

@@ -1,6 +1,10 @@
 package com.amandarezende.cronogramacapilar.presentation.telas
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -85,33 +89,47 @@ fun HomeScreen(
                     CardCabeloSaudavel()
                 }
             }
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    Button(onClick = {
+                        navController.navigate("cronocapilar/perfil")
+                    }, modifier = Modifier
+                        .padding(top = 8.dp, end = 4.dp)
+                        .weight(1f)) {
+                        Text(text = "Perfil")
+                    }
+                    Button(onClick = {
+                        navController.navigate("cronocapilar/cronograma")
+                    }, modifier = Modifier
+                        .padding(top = 8.dp, start = 4.dp)
+                        .weight(1f)) {
+                        Text(text = "Cronograma")
+                    }
 
-            item {
-                Button(onClick = {
-                    navController.navigate("cronocapilar/perfil")
-                }) {
-                    Text(text = "Perfil")
                 }
             }
             item {
-                Button(onClick = {
-                    navController.navigate("cronocapilar/cronograma")
-                }, modifier = Modifier.padding(top = 8.dp)) {
-                    Text(text = "Cronograma")
-                }
-            }
-            item {
-                Button(onClick = {
-                    navController.navigate("cronocapilar/etapa")
-                }, modifier = Modifier.padding(top = 8.dp)) {
-                    Text(text = "Sugestões")
-                }
-            }
-            item {
-                Button(onClick = {
-                    navController.navigate("cronocapilar/notificacao")
-                }, modifier = Modifier.padding(top = 8.dp)) {
-                    Text(text = "Notificação")
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    Button(onClick = {
+                        navController.navigate("cronocapilar/etapa")
+                    }, modifier = Modifier
+                        .padding(top = 8.dp, end = 4.dp)
+                        .weight(1f)) {
+                        Text(text = "Sugestões")
+                    }
+                    Button(onClick = {
+                        navController.navigate("cronocapilar/notificacao")
+                    }, modifier = Modifier
+                        .padding(top = 8.dp, start = 4.dp)
+                        .weight(1f)) {
+                        Text(text = "Notificação")
+                    }
                 }
             }
         }
